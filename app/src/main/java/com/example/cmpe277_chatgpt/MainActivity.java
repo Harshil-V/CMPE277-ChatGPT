@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         EditText promptInput = findViewById(R.id.promptEt);
         Button sendPromptBtn = findViewById(R.id.sendBtn);
-        Button cancelBtn = findViewById(R.id.CancelBtn);
+        Button cancelBtn = findViewById(R.id.cancelPromptBtn);
         TextView responseTextView = findViewById(R.id.resultTv);
 
         cancelBtn.setOnClickListener(v -> {
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         sendPromptBtn.setOnClickListener(v -> {
             String prompt = promptInput.getText().toString();
             if (!prompt.isEmpty()) {
-                progressDialog = ProgressDialog.show(MainActivity.this,
+                progressDialog = ProgressDialog.show(this,
                         "Loading",
                         "Please wait...",
                         true);
