@@ -2,6 +2,16 @@ plugins {
     alias(libs.plugins.androidApplication)
 }
 
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withInputStream { stream ->
+        localProperties.load(stream)
+    }
+}
+
+def openAIKey = localProperties['OPENAI_API_KEY'] ?: "UNKNOWN"
+
 android {
     namespace 'com.example.cmpe277_chatgpt'
     compileSdk 34
@@ -14,6 +24,11 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "OPENAI_API_KEY", "\"" + openAIKey + "\""
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
